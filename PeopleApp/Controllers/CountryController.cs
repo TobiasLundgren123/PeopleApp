@@ -7,99 +7,88 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PeopleApp.Data;
 using PeopleApp.Models.Data;
-using PeopleApp.Models.Services;
 
 namespace PeopleApp.Controllers
 {
-    public class CityController : Controller
+    public class CountryController : Controller
     {
-        //ICityService _cityService;
-
-        //public CityController(ICityService cityService)
-        //{
-        //    _cityService = cityService;
-        //}
-
-
         private readonly PeopleDbContext _context;
 
-        public CityController(PeopleDbContext context)
+        public CountryController(PeopleDbContext context)
         {
             _context = context;
         }
 
-
-
-        // GET: City
+        // GET: Country
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Cities.ToListAsync());
+              return View(await _context.Countries.ToListAsync());
         }
 
-        // GET: City/Details/5
+        // GET: Country/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cities == null)
+            if (id == null || _context.Countries == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.CityId == id);
-            if (city == null)
+            var country = await _context.Countries
+                .FirstOrDefaultAsync(m => m.CountryId == id);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(country);
         }
 
-        // GET: City/Create
+        // GET: Country/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: City/Create
+        // POST: Country/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CityId,CityName")] City city)
+        public async Task<IActionResult> Create([Bind("CountryId,CountryName")] Country country)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(city);
+                _context.Add(country);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(country);
         }
 
-        // GET: City/Edit/5
+        // GET: Country/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Cities == null)
+            if (id == null || _context.Countries == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
-            if (city == null)
+            var country = await _context.Countries.FindAsync(id);
+            if (country == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(country);
         }
 
-        // POST: City/Edit/5
+        // POST: Country/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CityId,CityName")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("CountryId,CountryName")] Country country)
         {
-            if (id != city.CityId)
+            if (id != country.CountryId)
             {
                 return NotFound();
             }
@@ -108,12 +97,12 @@ namespace PeopleApp.Controllers
             {
                 try
                 {
-                    _context.Update(city);
+                    _context.Update(country);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.CityId))
+                    if (!CountryExists(country.CountryId))
                     {
                         return NotFound();
                     }
@@ -124,49 +113,49 @@ namespace PeopleApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(country);
         }
 
-        // GET: City/Delete/5
+        // GET: Country/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Cities == null)
+            if (id == null || _context.Countries == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.CityId == id);
-            if (city == null)
+            var country = await _context.Countries
+                .FirstOrDefaultAsync(m => m.CountryId == id);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(country);
         }
 
-        // POST: City/Delete/5
+        // POST: Country/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cities == null)
+            if (_context.Countries == null)
             {
-                return Problem("Entity set 'PeopleDbContext.Cities'  is null.");
+                return Problem("Entity set 'PeopleDbContext.Countries'  is null.");
             }
-            var city = await _context.Cities.FindAsync(id);
-            if (city != null)
+            var country = await _context.Countries.FindAsync(id);
+            if (country != null)
             {
-                _context.Cities.Remove(city);
+                _context.Countries.Remove(country);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(int id)
+        private bool CountryExists(int id)
         {
-          return _context.Cities.Any(e => e.CityId == id);
+          return _context.Countries.Any(e => e.CountryId == id);
         }
     }
 }
