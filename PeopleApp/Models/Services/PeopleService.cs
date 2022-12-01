@@ -15,8 +15,8 @@ namespace PeopleApp.Models.Services
         {
             
             if (string.IsNullOrWhiteSpace(createPerson.Name)
-                || string.IsNullOrWhiteSpace(createPerson.PhoneNumber)
-                || string.IsNullOrWhiteSpace(createPerson.CityName))
+                || string.IsNullOrWhiteSpace(createPerson.PhoneNumber))
+                //|| string.IsNullOrWhiteSpace(createPerson.CityName))
             {
                 throw new ArgumentException("Name,PhoneNumber or City, not be consist of backspace(s)/whitespace(s)");
             }
@@ -95,10 +95,11 @@ namespace PeopleApp.Models.Services
                 //
                 foreach (Person item in _peopleRepo.Read())
                 {
-                    if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
-                       || item.CityName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                    if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase))
+                       //|| item.CityName.Contains(search, StringComparison.OrdinalIgnoreCase))
                     {
-                        searchPerson = searchPerson.Where(p => p.Name.ToUpper().Contains(search.ToUpper()) || p.CityName.Contains(search.ToUpper())).ToList();
+                    searchPerson = searchPerson.Where(p => p.Name.ToUpper().Contains(search.ToUpper())).ToList();
+                        //|| p.CityName.Contains(search.ToUpper())).ToList();
                         searchPerson.Add(item);
                     }
                 }

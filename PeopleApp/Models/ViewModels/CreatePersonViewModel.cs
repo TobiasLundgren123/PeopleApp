@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PeopleApp.Models.Data;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace PeopleApp.Models.ViewModels
@@ -13,7 +14,7 @@ namespace PeopleApp.Models.ViewModels
         public string? PhoneNumber { get; set; }
         [Display(Name = "City")]
         [Required]
-        public string? CityName { get; set; }
+        public City? CityName { get; set; }
 
         public List<string> CityList {
 
