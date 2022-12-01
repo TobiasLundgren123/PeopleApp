@@ -12,6 +12,8 @@ builder.Services.AddDbContext<PeopleDbContext>(options => options.UseSqlServer(b
 //builder.Services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
 builder.Services.AddScoped<IPeopleRepo, DataBasePeoplesRepo>();
 builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<ICityRepo, DataBaseCitysRepo>();
+builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 
